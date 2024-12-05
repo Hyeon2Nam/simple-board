@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { Link, Route, Routes } from "react-router-dom";
+import "./App.css";
+import ArticleEdit from "./board/ArticleEdit";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TopNav />
+      <Routes>
+        <Route path={"/"} element={<Home />} />
+        <Route path={"/writeArticle"} element={<ArticleEdit />} />
+      </Routes>
+    </div>
+  );
+}
+
+function TopNav() {
+  return (
+    <div style={{ border: "2px solid blue" }}>
+      <Link to={"/"}>Home으로 이동</Link> <br />
+    </div>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <Link to={"/writeArticle"}>!!!!!!!!!게시판!!!!!!!!!</Link> <br />
     </div>
   );
 }
