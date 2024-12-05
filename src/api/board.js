@@ -17,3 +17,7 @@ export const loadArticle = (obj) => {
 export const deleteArticle = (article) => {
   return api.post("/board/remove", JSON.stringify(article));
 };
+
+export const countAticleGood = (article) => {
+  return api.post("/board/good", JSON.stringify(article));
+};

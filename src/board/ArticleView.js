@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteArticle, loadArticle } from "../api/board";
+import { countAticleGood, deleteArticle, loadArticle } from "../api/board";
 import { useEffect, useState } from "react";
 
 export default function ArticleView() {
@@ -46,11 +46,18 @@ export default function ArticleView() {
 
   const editArticleInfo = () => {};
 
+  const upGoodCount = () => {
+    setArticle({ ...article, boardGood: article.boardGood + 1 });
+
+    const obj = { boardId: params.id };
+    countAticleGood(obj);
+  };
+
   return (
     <div>
       <div>
         <h1>{article.title}</h1>
-        <input type="button" value={"추천"} />
+        <input type="button" value={"추천"} onClick={upGoodCount} />
       </div>
       <hr />
       <div
