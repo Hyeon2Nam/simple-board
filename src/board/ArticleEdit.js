@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { insertArticle } from "../api/board";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { editArticle, insertArticle, loadArticle } from "../api/board";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ArticleEdit() {
   const navigate = useNavigate();
+  const params = useParams();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isCreate, setisCreate] = useState(true);
 
   const writeArticle = () => {
     const obj = {
@@ -21,6 +24,40 @@ export default function ArticleEdit() {
       } else alert("글 작성 실패!");
     });
   };
+
+  const loadArticleInfo = () => {
+    const obj = { boardId: params.id };
+
+    loadArticle(obj).then((res) => {
+      if (res.data.code === "200" && res.data.msg === "success") {
+        setTitle(res.data.data.title);
+        setContent(res.data.data.content);
+      }
+    });
+  };
+
+  const editArticleInfo = () => {
+    const obj = {
+      boardId: params.id,
+      title: title,
+      content: content,
+      memberId: "hong",
+    };
+
+    editArticle(obj).then((res) => {
+      if (res.data.code === "200") {
+        alert("글 수정 완료");
+        navigate("/");
+      } else alert("글 수정 실패!");
+    });
+  };
+
+  useEffect(() => {
+    if (params.mode === "edit") {
+      loadArticleInfo();
+      setisCreate(false);
+    }
+  }, []);
 
   return (
     <div
@@ -51,7 +88,11 @@ export default function ArticleEdit() {
         onChange={(e) => setContent(e.target.value)}
       />
       <br />
-      <input type="button" value={"글 작성"} onClick={writeArticle} />
+      <input
+        type="button"
+        value={isCreate ? "글 작성" : "글 수정"}
+        onClick={isCreate ? writeArticle : editArticleInfo}
+      />
     </div>
   );
 }

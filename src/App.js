@@ -10,7 +10,7 @@ function App() {
       <TopNav />
       <Routes>
         <Route path={"/"} element={<Board />} />
-        <Route path={"/writeArticle/:mode"} element={<ArticleEdit />} />
+        <Route path={"/writeArticle/:mode/:id"} element={<ArticleEdit />} />
         <Route path={"/view/:id"} element={<ArticleView />} />
       </Routes>
     </div>

@@ -5,6 +5,7 @@ import ArticleList from "./ArticleList";
 
 export default function Board() {
   const navigate = useNavigate();
+
   const [search, setSearch] = useState("");
   const [searchCategory, setSearchCategory] = useState("");
   const [articleList, setArticleList] = useState([]);
@@ -40,7 +41,7 @@ export default function Board() {
           <input
             type="button"
             value={"글 작성"}
-            onClick={() => navigate("/writeArticle/create")}
+            onClick={() => navigate("/writeArticle/create/0")}
           />
           <div>
             <select onChange={(e) => setSearchCategory(e.target.value)}>

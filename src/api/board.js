@@ -21,3 +21,7 @@ export const deleteArticle = (article) => {
 export const countAticleGood = (article) => {
   return api.post("/board/good", JSON.stringify(article));
 };
+
+export const editArticle = (article) => {
+  return api.post("/board/modify", JSON.stringify(article));
+};

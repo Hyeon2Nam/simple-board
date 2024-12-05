@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 export default function ArticleView() {
   const navigate = useNavigate();
-  const [article, setArticle] = useState({});
   const params = useParams();
+  const [article, setArticle] = useState({});
 
   useEffect(() => {
     loadArticleInfo();
@@ -96,7 +96,11 @@ export default function ArticleView() {
           justifyContent: "space-evenly",
         }}
       >
-        <input type="button" value={"수정하기"} onClick={editArticleInfo} />
+        <input
+          type="button"
+          value={"수정하기"}
+          onClick={() => navigate("/writeArticle/edit/" + params.id)}
+        />
         <input type="button" value={"삭제하기"} onClick={deleteArticleInfo} />
       </div>
     </div>
