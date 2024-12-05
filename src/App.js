@@ -1,13 +1,14 @@
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ArticleEdit from "./board/ArticleEdit";
+import Board from "./board/Board";
 
 function App() {
   return (
     <div className="App">
       <TopNav />
       <Routes>
-        <Route path={"/"} element={<Home />} />
+        <Route path={"/"} element={<Board />} />
         <Route path={"/writeArticle"} element={<ArticleEdit />} />
       </Routes>
     </div>
@@ -17,15 +18,7 @@ function App() {
 function TopNav() {
   return (
     <div style={{ border: "2px solid blue" }}>
-      <Link to={"/"}>Home으로 이동</Link> <br />
-    </div>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <Link to={"/writeArticle"}>!!!!!!!!!게시판!!!!!!!!!</Link> <br />
+      <Link to={"/"}>게시판</Link> <br />
     </div>
   );
 }
