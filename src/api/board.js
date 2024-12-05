@@ -7,3 +7,9 @@ export const insertArticle = (article) => {
 export const loadArticleList = () => {
   return api.get("/board/list");
 };
+
+export const loadArticle = (obj) => {
+  return api.get("/board/find", {
+    params: obj,
+  });
+};
