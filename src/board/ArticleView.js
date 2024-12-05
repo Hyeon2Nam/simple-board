@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { loadArticle } from "../api/board";
+import { deleteArticle, loadArticle } from "../api/board";
 import { useEffect, useState } from "react";
 
 export default function ArticleView() {
@@ -23,15 +23,28 @@ export default function ArticleView() {
   const loadArticleInfo = () => {
     const obj = { boardId: params.id };
 
-    console.log(obj);
-
     loadArticle(obj).then((res) => {
-      console.log(res);
+      //   console.log(res);
       if (res.data.code === "200") {
         setArticle(res.data.data);
       } else navigate("/");
     });
   };
+
+  const deleteArticleInfo = () => {
+    const obj = {
+      boardId: params.id,
+    };
+
+    deleteArticle(obj).then((res) => {
+      if (res.data.code === "200" && res.data.msg === "success") {
+        alert("삭제완료");
+        navigate("/");
+      } else alert("삭제실패");
+    });
+  };
+
+  const editArticleInfo = () => {};
 
   return (
     <div>
@@ -60,7 +73,25 @@ export default function ArticleView() {
           {")"}
         </div>
       </div>
-      <div>{article.content}</div>
+      <div
+        style={{
+          margin: "30px 0",
+        }}
+      >
+        {article.content}
+      </div>
+      <hr />
+      <div
+        style={{
+          marginTop: "30px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
+        <input type="button" value={"수정하기"} onClick={editArticleInfo} />
+        <input type="button" value={"삭제하기"} onClick={deleteArticleInfo} />
+      </div>
     </div>
   );
 }

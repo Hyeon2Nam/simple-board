@@ -13,3 +13,7 @@ export const loadArticle = (obj) => {
     params: obj,
   });
 };
+
+export const deleteArticle = (article) => {
+  return api.post("/board/remove", JSON.stringify(article));
+};
