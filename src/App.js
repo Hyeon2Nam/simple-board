@@ -2,6 +2,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ArticleEdit from "./board/ArticleEdit";
 import Board from "./board/Board";
+import ArticleView from "./board/ArticleView";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <TopNav />
       <Routes>
         <Route path={"/"} element={<Board />} />
-        <Route path={"/writeArticle"} element={<ArticleEdit />} />
+        <Route path={"/writeArticle/:mode"} element={<ArticleEdit />} />
+        <Route path={"/view/:id"} element={<ArticleView />} />
       </Routes>
     </div>
   );

@@ -40,7 +40,7 @@ export default function Board() {
           <input
             type="button"
             value={"글 작성"}
-            onClick={() => navigate("/writeArticle?mode=create")}
+            onClick={() => navigate("/writeArticle/create")}
           />
           <div>
             <select onChange={(e) => setSearchCategory(e.target.value)}>
