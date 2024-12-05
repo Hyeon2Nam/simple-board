@@ -14,7 +14,7 @@ export default function ArticleItem({ item }) {
 
   return (
     <div
-      onClick={() => navigate("/view?id=" + item.boardIdx)}
+      onClick={() => navigate("/view/" + item.boardIdx)}
       style={{
         padding: "2%",
         display: "flex",
