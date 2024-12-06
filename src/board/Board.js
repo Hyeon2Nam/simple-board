@@ -11,6 +11,7 @@ export default function Board() {
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
+    localStorage.setItem("userId", "hong");
     loadArticles();
   }, []);
 
@@ -30,10 +31,8 @@ export default function Board() {
     };
 
     searchArticle(obj).then((res) => {
-      console.log(res);
-
       if (res.data.code === "200" && res.data.msg === "success")
-        setArticleList(res.data.data);
+        setArticleList(res.data.data.reverse());
       else setArticleList([]);
     });
   };
