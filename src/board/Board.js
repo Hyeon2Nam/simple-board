@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadArticleList } from "../api/board";
+import { loadArticleList, searchArticle } from "../api/board";
 import ArticleList from "./ArticleList";
 
 export default function Board() {
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");
-  const [searchCategory, setSearchCategory] = useState("");
+  const [authroSearch, setAuthroSearch] = useState("");
+  const [titleSearch, setTitleSearch] = useState("");
   const [articleList, setArticleList] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,21 @@ export default function Board() {
       if (res.data.code === "200") {
         setArticleList(res.data.data.reverse());
       }
+    });
+  };
+
+  const searchArticleInfo = () => {
+    let obj = {
+      keyword: titleSearch,
+      created: authroSearch,
+    };
+
+    searchArticle(obj).then((res) => {
+      console.log(res);
+
+      if (res.data.code === "200" && res.data.msg === "success")
+        setArticleList(res.data.data);
+      else setArticleList([]);
     });
   };
 
@@ -44,17 +59,21 @@ export default function Board() {
             onClick={() => navigate("/writeArticle/create/0")}
           />
           <div>
-            <select onChange={(e) => setSearchCategory(e.target.value)}>
-              <option value={"all"}>전체</option>
-              <option value={"keyword"}>제목</option>
-              <option value={"created"}>글쓴이</option>
-            </select>
-            <input value={search} onChange={(e) => setSearch(e.target.value)} />
-            <input
-              type="button"
-              value={"검색"}
-              onClick={() => navigate("/board")}
-            />
+            <div>
+              <span>글쓴이 검색</span>
+              <input
+                value={authroSearch}
+                onChange={(e) => setAuthroSearch(e.target.value)}
+              />
+            </div>
+            <div>
+              <span>제목 검색</span>
+              <input
+                value={titleSearch}
+                onChange={(e) => setTitleSearch(e.target.value)}
+              />
+            </div>
+            <input type="button" value={"검색"} onClick={searchArticleInfo} />
           </div>
         </div>
         <div
