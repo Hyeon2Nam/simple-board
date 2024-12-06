@@ -6,9 +6,11 @@ export default function ArticleView() {
   const navigate = useNavigate();
   const params = useParams();
   const [article, setArticle] = useState({});
+  const [loginUserId, setLoginUserId] = useState("");
 
   useEffect(() => {
     loadArticleInfo();
+    setLoginUserId(localStorage.getItem("userId"));
   }, []);
 
   const reFormateDate = () => {
@@ -57,7 +59,9 @@ export default function ArticleView() {
     <div>
       <div>
         <h1>{article.title}</h1>
-        <input type="button" value={"추천"} onClick={upGoodCount} />
+        {loginUserId !== article.memberId && (
+          <input type="button" value={"추천"} onClick={upGoodCount} />
+        )}
       </div>
       <hr />
       <div
@@ -88,21 +92,23 @@ export default function ArticleView() {
         {article.content}
       </div>
       <hr />
-      <div
-        style={{
-          marginTop: "30px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-evenly",
-        }}
-      >
-        <input
-          type="button"
-          value={"수정하기"}
-          onClick={() => navigate("/writeArticle/edit/" + params.id)}
-        />
-        <input type="button" value={"삭제하기"} onClick={deleteArticleInfo} />
-      </div>
+      {loginUserId === article.memberId && (
+        <div
+          style={{
+            marginTop: "30px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          <input
+            type="button"
+            value={"수정하기"}
+            onClick={() => navigate("/writeArticle/edit/" + params.id)}
+          />
+          <input type="button" value={"삭제하기"} onClick={deleteArticleInfo} />
+        </div>
+      )}
     </div>
   );
 }

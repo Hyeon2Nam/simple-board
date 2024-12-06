@@ -18,7 +18,7 @@ export default function ArticleEdit() {
     };
 
     insertArticle(obj).then((res) => {
-      if (res.data.code === "200") {
+      if (res.data.code === "200" && res.data.msg === "success") {
         alert("글 작성 완료");
         navigate("/");
       } else alert("글 작성 실패!");
