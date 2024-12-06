@@ -27,7 +27,7 @@ export default function ArticleView() {
 
     loadArticle(obj).then((res) => {
       //   console.log(res);
-      if (res.data.code === "200") {
+      if (res.data.code === "200" && res.data.msg === "success") {
         setArticle(res.data.data);
       } else navigate("/");
     });
