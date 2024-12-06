@@ -35,14 +35,17 @@ export default function ArticleView() {
 
   const deleteArticleInfo = () => {
     const obj = {
-      boardId: params.id,
+      boardIdx: params.id,
     };
 
     deleteArticle(obj).then((res) => {
       if (res.data.code === "200" && res.data.msg === "success") {
         alert("삭제완료");
         navigate("/");
-      } else alert("삭제실패");
+      } else {
+        alert("삭제실패");
+        navigate("/");
+      }
     });
   };
 
