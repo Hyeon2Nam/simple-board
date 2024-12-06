@@ -25,3 +25,9 @@ export const countAticleGood = (article) => {
 export const editArticle = (article) => {
   return api.post("/board/modify", JSON.stringify(article));
 };
+
+export const searchArticle = (obj) => {
+  return api.get("/board/list", {
+    params: obj,
+  });
+};
