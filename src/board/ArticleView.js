@@ -49,12 +49,10 @@ export default function ArticleView() {
     });
   };
 
-  const editArticleInfo = () => {};
-
   const upGoodCount = () => {
-    setArticle({ ...article, boardGood: article.boardGood + 1 });
+    setArticle({ ...article, good: article.good + 1 });
 
-    const obj = { boardId: params.id };
+    const obj = { boardIdx: params.id };
     countAticleGood(obj);
   };
 
@@ -83,7 +81,7 @@ export default function ArticleView() {
         {/* <div>수정일 : {article.memberId}</div> */}
         <div>
           추천수 {"("}
-          {article.boardGood}
+          {article.good}
           {")"}
         </div>
       </div>

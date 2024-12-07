@@ -38,7 +38,7 @@ export default function ArticleEdit() {
 
   const editArticleInfo = () => {
     const obj = {
-      boardId: params.id,
+      boardIdx: params.id,
       title: title,
       content: content,
       memberId: "hong",
