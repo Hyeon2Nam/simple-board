@@ -27,7 +27,7 @@ export default function ArticleView() {
 
     loadArticle(obj).then((res) => {
       //   console.log(res);
-      if (res.data.code === "200") {
+      if (res.data.code === "200" && res.data.msg === "success") {
         setArticle(res.data.data);
       } else navigate("/");
     });
@@ -35,23 +35,24 @@ export default function ArticleView() {
 
   const deleteArticleInfo = () => {
     const obj = {
-      boardId: params.id,
+      boardIdx: params.id,
     };
 
     deleteArticle(obj).then((res) => {
       if (res.data.code === "200" && res.data.msg === "success") {
         alert("삭제완료");
         navigate("/");
-      } else alert("삭제실패");
+      } else {
+        alert("삭제실패");
+        navigate("/");
+      }
     });
   };
 
-  const editArticleInfo = () => {};
-
   const upGoodCount = () => {
-    setArticle({ ...article, boardGood: article.boardGood + 1 });
+    setArticle({ ...article, good: article.good + 1 });
 
-    const obj = { boardId: params.id };
+    const obj = { boardIdx: params.id };
     countAticleGood(obj);
   };
 
@@ -80,7 +81,7 @@ export default function ArticleView() {
         {/* <div>수정일 : {article.memberId}</div> */}
         <div>
           추천수 {"("}
-          {article.boardGood}
+          {article.good}
           {")"}
         </div>
       </div>

@@ -15,6 +15,8 @@ export const loadArticle = (obj) => {
 };
 
 export const deleteArticle = (article) => {
+  console.log(article);
+
   return api.post("/board/remove", JSON.stringify(article));
 };
 

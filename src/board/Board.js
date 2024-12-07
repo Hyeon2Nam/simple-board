@@ -81,6 +81,7 @@ export default function Board() {
             margin: "0 20%",
             marginTop: "30px",
             height: "70vh",
+            overflow: "scroll",
           }}
         >
           <ArticleList list={articleList} />

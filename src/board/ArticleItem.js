@@ -36,7 +36,7 @@ export default function ArticleItem({ item }) {
         </span>
         <b>{item.title}</b>
         {"  ("}
-        {item.boardGood}
+        {item.good}
         {")"}
       </div>
       <div
